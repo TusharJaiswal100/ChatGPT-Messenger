@@ -1,7 +1,7 @@
 import Chat from "../../../components/Chat";
 import ChatInput from "../../../components/ChatInput";
 
-type Props = { // typescript // here it is used to get the url of chat page  in terms of id
+type Props = { 
     params: {
         id: string;
     };
