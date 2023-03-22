@@ -23,28 +23,28 @@ function ChatRow({id}: Props) {
     );
 
     useEffect(() => {
-        if(!pathname) return; // if pathname is not their
+        if(!pathname) return; 
         
-        setActive(pathname.includes(id)); // if pathname includes id
+        setActive(pathname.includes(id));
     }, [pathname]);
 
-    const removeChat = async() => { // this fucntion is to delete that chat  // this function is called below in <TrashIcon>
-        await deleteDoc(doc(db, 'users', session?.user?.email!,'chats', id)) // delete doc is inbuilt function of firebase for deleting a document
-        router.replace("/"); // when chat is deleted the user should be directed to home page
+    const removeChat = async() => { 
+        await deleteDoc(doc(db, 'users', session?.user?.email!,'chats', id)) 
+        router.replace("/");
     }
 
-  return ( // <Link> this allows us to iterate through URL easily
+  return ( 
     <Link 
-    href={`/chat/${id}`} className={`chatRow justify-center ${active && "bg-gray-700/50"}`}>  {/* when user click on chatrow then it will change the color to gray and we are knowing this that user has clicked on the chatrow by passing here active, means if active has id then user is at taht particular chat row */}
+    href={`/chat/${id}`} className={`chatRow justify-center ${active && "bg-gray-700/50"}`}> 
     <ChatBubbleLeftIcon className="h-5 w-5"/>  
     <p className="flex-1 hidden md:inline-flex truncate">
      {messages?.docs[messages?.docs.length-1]?.data().text || "New Chat"} 
      </p>
     <TrashIcon 
-    onClick={removeChat} // when user click delete image then onclick will call remove chat function and chat will get deleted
+    onClick={removeChat} 
     className="h-5 w-5 text-gray-700 hover:text-red-700"/>
     </Link>
   )
 }
-// line 38 means if their is already ongoing chat then it will show that old chat else it will show new chat
+
 export default ChatRow
