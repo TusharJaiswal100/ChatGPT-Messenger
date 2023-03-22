@@ -19,9 +19,9 @@ export default async function RootLayout({
       <head/>
       <body>
         <SessionProvider session={session}>
-          {!session ? ( // if session is not loged in  , go to login page
+          {!session ? ( 
             <Login/>
-          ): ( // else part // if session is logged in, exexute below lines
+          ): ( 
         <div className="flex">
           {/* Sidebar */}
           <div className="bg-[#202123] max-w-xs h-screen
@@ -29,7 +29,7 @@ export default async function RootLayout({
           <SideBar/> 
           </div>
           {/* ClientProvider - Notificattion -> Chatgpt is Thinking */}
-          <ClientProvider/> {/* we use this parent to push anything that needs client at the top level */}
+          <ClientProvider/> 
 
           <div className="bg-[#343541] flex-1">{children}</div>
         </div>
