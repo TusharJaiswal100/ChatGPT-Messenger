@@ -28,7 +28,7 @@ export default async function RootLayout({
            overflow-y-auto md:min-w-[20rem]">
           <SideBar/> 
           </div>
-          {/* ClientProvider - Notificattion -> Chatgpt is Thinking */}
+         
           <ClientProvider/> 
 
           <div className="bg-[#343541] flex-1">{children}</div>
