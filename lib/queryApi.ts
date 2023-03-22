@@ -3,7 +3,7 @@
 
 import openai from "./chatgpt";
 
-const query = async (prompt: string, chatId: string, model: string) => {      // prompt: string means , prompt is a string
+const query = async (prompt: string, chatId: string, model: string) => {    
      const res = await openai.createCompletion({
         model,
         prompt, 
