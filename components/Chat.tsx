@@ -16,13 +16,13 @@ function Chat({chatId}: Props) {
 
     const [messages] = useCollection(session && query(
         collection(db, "users", session?.user?.email!, "chats", chatId, "messages"), // first argument
-        orderBy("createdAt", "asc") // second argument
+        orderBy("createdAt", "asc") 
     ))
 
     return ( 
     <div className="flex-1 overflow-y-auto overflow-x-hidden">
 
-    {messages?.empty && ( // if their is no message means user has created new chat then he will see a line written  Type in a prompt below to get started!  with a symbol line 33 to line 35
+    {messages?.empty && ( 
         <>
         <p className="mt-10 text-center text-white">
             Type in a prompt below to get started! 
@@ -32,7 +32,7 @@ function Chat({chatId}: Props) {
         </>
     )}
 
-        {messages?.docs.map((message) => ( // mapping through each messages
+        {messages?.docs.map((message) => ( 
             <Message key={message.id} message={message.data()}/>
         ))}
     </div>
