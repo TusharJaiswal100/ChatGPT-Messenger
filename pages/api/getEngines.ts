@@ -3,12 +3,12 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import openai from "../../lib/chatgpt";
 
-type Option = { // type script
+type Option = { 
     value: string;
     label: string;
 };
 
-type Data = { // type script
+type Data = {
     modelOptions: Option[];
 };
 
@@ -23,7 +23,7 @@ export default async function handler(
         label: model.id,
     }));
 
-    res.status(200).json({ // returning response
+    res.status(200).json({ 
         modelOptions,
     });
 }
