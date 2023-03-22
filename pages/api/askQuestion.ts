@@ -1,4 +1,4 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+
 
 import type { NextApiRequest, NextApiResponse } from 'next'
 import query from '../../lib/queryApi';
@@ -16,7 +16,7 @@ export default async function handler(
 ) {
     const {prompt, chatId, model, session } = req.body; // taking out all these prompts from backend
 
-      // if prompt is not passed it return 400 status which means error and it diplays please provide prompt
+     
     if(!prompt){
         res.status(400).json({ answer: "Please provide a prompt!" });
         return;
@@ -26,12 +26,10 @@ export default async function handler(
         res.status(400).json({ answer: "Please provide a valid chat ID!" });
         return;
     }
-
-// ChatGPT Query
    const response = await query (prompt, chatId, model)
 
-   const message: Message = { // keep a consistent with previous message
-    text: response || "ChatGPT is unable to find an answer for that!", // if text if available then return the response else return the line chatgpt not find
+   const message: Message = { 
+    text: response || "ChatGPT is unable to find an answer for that!", 
     createdAt: admin.firestore.Timestamp.now(),
     user: {
         _id: "ChatGPT",
@@ -40,7 +38,7 @@ export default async function handler(
     },
    };
 
-    await adminDb // adding to database
+    await adminDb 
     .collection("users")
     .doc(session?.user?.email)
     .collection("chats")
@@ -48,5 +46,5 @@ export default async function handler(
     .collection("messages")
     .add(message);
 
-  res.status(200).json({ answer: message.text }); // this line will send back the answer to the user
+  res.status(200).json({ answer: message.text }); 
 }
