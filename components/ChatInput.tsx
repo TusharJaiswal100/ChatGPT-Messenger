@@ -21,35 +21,35 @@ function ChatInput({chatId}: Props) {
         fallbackData: "text-davinci-003",
     })
 
-    // in below line FormEvent<HTMLFormElement> is used because when user types something then we dont know what type he has written , then due to this line it automatically understands its types we dont have to write anything for type
+    
     const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if(!prompt) return; // if their is not prompt the return
-        const input = prompt.trim(); // if their is any input
+        if(!prompt) return;
+        const input = prompt.trim(); 
         setPrompt("");
 
-        const message: Message = { // here, Message is custom type defintion created in typing.d.ts
+        const message: Message = { 
             text: input,
             createdAt: serverTimestamp(),
             user: {
-                _id: session?.user?.email!, // user email
-                name: session?.user?.name!, // user name
-                avatar: session?.user?.image! ||     // image of the user
-                `https://ui-avatars.com/api/?name=${session?.user?.name}`, // if their is no image of user then assign it image like A, BD, etc
+                _id: session?.user?.email!,
+                name: session?.user?.name!, 
+                avatar: session?.user?.image! ||     
+                `https://ui-avatars.com/api/?name=${session?.user?.name}`,
             }
         }
-        // till above this step we got the message
+       
 
-        // now from below line put the message in database
-       await addDoc(collection(db, 'users', session?.user?.email!, 'chats', chatId, 'messages'), // first argument of addDoc // here we are adding to the firebase from client
-       message // second argument of addDoc
+       
+       await addDoc(collection(db, 'users', session?.user?.email!, 'chats', chatId, 'messages'), 
+       message 
        );
 
-       // Toast notification to say Loading!
-       const notification = toast.loading('ChatGPT is Thinking...'); // shows the notification chatgpt thinking 
+    
+       const notification = toast.loading('ChatGPT is Thinking...'); 
 
-       // fetch method is created to communicate with our own api
-       await fetch('/api/askQuestion', { // our own api // creating api
+       
+       await fetch('/api/askQuestion', { 
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -58,7 +58,7 @@ function ChatInput({chatId}: Props) {
             prompt: input, 
             chatId, 
             model, 
-            session   // these prompt are send to the backend
+            session   
         }),
        }).then(() => {
         // Toast notification to say successful!
