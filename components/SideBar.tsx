@@ -11,12 +11,12 @@ import NewChat from "./NewChat";
 function SideBar() {
   const { data: session } = useSession();
 
-  const [chats, loading, error] = useCollection( // making connection to firebase
+  const [chats, loading, error] = useCollection( 
     session && 
       query(
         collection(db, 'users', session.user?.email!, 
-        "chats"), // this lines mean session should be there and way in which data is stored in firebase
-        orderBy("createdAt", "asc") // by this line most recent chat at left side in sidebar will come first
+        "chats"), 
+        orderBy("createdAt", "asc") 
       )
   );
 
@@ -26,25 +26,25 @@ function SideBar() {
             <div>
                 {/* NewChat */}
                 <NewChat/>
-                <div className="hidden sm:inline">    {/* ModelSelection */}
+                <div className="hidden sm:inline">    
                 <ModelSelection />
                 </div>
                 <div className="flex flex-col space-y-2 my-2">
-                  {loading && (   // if chat is loading then show Loading Chat...
+                  {loading && (   
                     <div className="animate-pulse text-center text-white">
                       <p>Loading Chats...</p>
                     </div>
                   )}
-                 {/* Map through the Chatrows */}
+              
                   {chats?.docs.map(chat =>(
-                 <ChatRow key={chat.id} id={chat.id}/> // chat row means the chats which are present in left side of the chatgpt
+                 <ChatRow key={chat.id} id={chat.id}/> 
                 ))}
                 </div>
             </div>
         </div>
         {session && (
-        <img  // for profile photo
-        onClick={() => signOut()} // log out
+        <img  
+        onClick={() => signOut()}
         src={session.user?.image!} alt=""
         className="h-12 w-12 rounded-full cursor-pointer mx-auto mb-2
         hover: opacity-50"
