@@ -12,15 +12,15 @@ function NewChat() {
 
 
   const createNewChat = async() => {
-    const doc = await addDoc( // this is the way in which information will be stored in firebase database
+    const doc = await addDoc( 
       collection(db, "users", session?.user?.email!, "chats"),
       {
-        //messages: [], // message will be stored
-        userId: session?.user?.email!, // userId will be stored
-        createdAt: serverTimestamp() // time will be stored
+        
+        userId: session?.user?.email!, 
+        createdAt: serverTimestamp() 
       }
     );
-    router.push(`/chat/${doc.id}`) // redirect the user to chat screen // when a user click on new chat then user should be directed to the new chat
+    router.push(`/chat/${doc.id}`)
   };
   return (
     <div onClick={createNewChat} className="border-gray-700 border chatRow">
